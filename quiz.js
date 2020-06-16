@@ -95,8 +95,14 @@ function openPage(){
             resultsDiv.appendChild(resultsText); 
             index++;
             nextQuestion();
+            restartTimer();
         }
 
+    }
+
+    function restartTimer(){
+      
+        
     }
     
 
@@ -148,7 +154,6 @@ function checkAnswer(event){
         resultsText.textContent ="WRONG";
         resultsDiv.appendChild(resultsText);
 
-         // function timesOut(){
            
         }
     
@@ -169,6 +174,7 @@ function checkAnswer(event){
             index ++;
             
             nextQuestion();
+            
             
 
         }
