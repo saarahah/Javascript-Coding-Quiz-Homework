@@ -93,6 +93,7 @@ function openPage(){
         if (timesUp===true){
             resultsText.textContent ="TIME UP";
             resultsDiv.appendChild(resultsText); 
+            index++;
             nextQuestion();
         }
 
