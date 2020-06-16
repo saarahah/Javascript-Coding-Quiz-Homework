@@ -25,6 +25,7 @@ var resultsText = document.createElement("p");
 
 //variable to store time
 var timer = 75;
+var timesUp=false;
 
 
 //var to store current index
@@ -42,6 +43,8 @@ function openPage(){
 
     //button
     startButton.textContent = "start quiz";
+    // startButton.classList.add("startBtn");
+    startButton.id="startBtn";
 
     //append text to container
 
@@ -53,9 +56,12 @@ function openPage(){
 
      function startQuiz(){
         //show timer function
+        if(event.target.matches("#startBtn")){
         showTimer();
-
+        nextQuestion();
+        
      }
+    }
 
     //function that handles timer
     function showTimer(){
@@ -72,18 +78,26 @@ function openPage(){
             //if time reach zero stop
          if (timer === 0){
                 clearInterval(timeInterval);
-                // clearTimeout(timer);  
+                // clearTimeout(timer); 
+              timesUp=true;  
+              timeOut();
+              
             }
         },10);
-
-
-
-
-
-        //inside
-        nextQuestion();
+       //inside
+        // nextQuestion();
     }
     //function that handles and displays next Q
+
+    function timeOut(){
+        if (timesUp===true){
+            resultsText.textContent ="TIME UP";
+            resultsDiv.appendChild(resultsText); 
+            nextQuestion();
+        }
+
+    }
+    
 
     function nextQuestion(){
         var currentQuestion = questions[index];
@@ -102,8 +116,7 @@ function openPage(){
             answerButton.classList.add("choiceBtn");
             answerButton.textContent = currentQuestion.choices[i];
             answersDiv.appendChild(answerButton);
-            
-        
+
         }
 
         //append div to container
@@ -112,10 +125,11 @@ function openPage(){
     };
 
     //function to check answer and display
-    function checkAnswer(event){
+function checkAnswer(event){
+   
         //if event.target matches class choice button
-        if (event.target.matches(".choiceBtn")){
-            // questions.answer;
+    if (event.target.matches(".choiceBtn")){
+    
 
         //    if (".choicebtn"===currentQuestion.answer){
             //console.log(event.target.textContent);
@@ -126,11 +140,17 @@ function openPage(){
         resultsText.textContent ="correct!";
         resultsDiv.appendChild(resultsText);
 
-        }else{
+     }else if (event.target.textContent!=questions[index].answer){
+        
+        console.log(timesUp);
 
         resultsText.textContent ="WRONG";
         resultsDiv.appendChild(resultsText);
+
+         // function timesOut(){
+           
         }
+    
           
         var resultsInterval = setInterval(function(){
             //decrease by 1
@@ -146,7 +166,9 @@ function openPage(){
             //logic to check answer
 
             index ++;
+            
             nextQuestion();
+            
 
         }
 
@@ -155,12 +177,11 @@ function openPage(){
     }
 
     //add event listener
-    startButton.addEventListener("click", startQuiz)
+    startButton.addEventListener("click", startQuiz);
 
     //event listen for choice
     //hook up to whole element, button is not yet created
     document.addEventListener("click", checkAnswer);
 
-    //function to check the answer and display next Q
 
     openPage();
