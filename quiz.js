@@ -43,12 +43,12 @@ var questionText = document.createElement("p");
 var resultsText = document.createElement("p");
 
 var finalresultsText = document.createElement("h1");
+var finalscoreText = document.createElement("p");
 
 //variable to store time
 var timesUp=false;
-var timerNumber= 4;
+var timerNumber= 20;
 var timer = timerNumber;
-
 
 //var to store current index
 var index = 0;
@@ -110,7 +110,20 @@ function showTimer(){
     },1000);
     //}
 }
-    //function that handles and displays next Q
+//function that handles and displays next Q
+//function to check answer and display
+function timeDecrease(){
+    timerNumber = timerNumber-5;
+    timerDisplay.textContent = timerNumber;
+    if (timerNumber === 0){
+    //clearInterval(timeInterval);
+    //timeOut();
+    
+    timerNumber = 20; 
+    restartTimer();
+    index++;
+    }  
+ }
 
 function restartTimer(){
             timer= timerNumber;
@@ -159,7 +172,8 @@ function nextQuestion(){
         containerE1.appendChild(answersDiv);
 };
 
-//function to check answer and display
+
+
 function checkAnswer(event){  
 //if event.target matches class choice button
     if (event.target.matches(".choiceBtn")){
@@ -168,31 +182,26 @@ function checkAnswer(event){
             resultsText.textContent ="correct!";
             resultsDiv.appendChild(resultsText);
             textTimeout();
-                }else{
-// if (event.target.textContent!=questions[index].answer){
+            score=score+10;
+            console.log("score= " + score );
+            index++;
+                }else if (event.target.textContent!=questions[index].answer){
+            //hmmmmmm
+            //timerDisplay=timer-5;
+            timeDecrease();
             resultsText.textContent ="WRONG";
-            resultsDiv.appendChild(resultsText);
+            resultsDiv.appendChild(resultsText);           
             textTimeout();
                     }
-         //logic to check answer
-        // index ++;
-        // console.log("checkAnswer incremented index, index is " + index);
-        // nextQuestion();
-        
-        // lastPage();
-        //console.log(timer);
-         index ++;
-         //restartTimer();
-         //nextQuestion();
+     //old
+         //index ++;
+
     if(index != questions.length){
         console.log("checkAnswer incremented index, index is " + index);
-      //  index ++;
+
         nextQuestion();
-       restartTimer();
-        }else{
-        // console.log("checkAnswer incremented index, index is " + index);
-        // nextQuestion();
-        // restartTimer();
+        restartTimer();
+            }else{
         lastPage();
         }
     }
@@ -208,18 +217,19 @@ function textTimeout(){
     resultsTimer=1;
     clearInterval(resultsInterval);
             }
-        },1000)
-    }
+    },1000)
+}
 
-function lastPage(){
-    
+function lastPage(){    
     timesUp=true; 
     clearInterval(timeInterval);
     containerE1.textContent = "";
     timerDisplay.textContent="";
     resultsDiv.textContent="";
     finalresultsText.textContent = "High Score";
+    finalscoreText.textContent = "Your Final Score is " + score;
     containerE1.appendChild(finalresultsText);
+    containerE1.appendChild(finalscoreText);
     console.log("last page runnin")
     }
 
