@@ -195,11 +195,12 @@ function checkAnswer(event){
      
          
      
-        index ++;
+        // index ++;
 
 
         if(index != questions.length){
             console.log("checkAnswer incremented index, index is " + index);
+        index ++;
         nextQuestion();
         restartTimer();
 
