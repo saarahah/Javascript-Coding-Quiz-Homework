@@ -91,7 +91,6 @@ function openPage(){
             clearInterval(timeInterval);
                 // clearTimeout(timer); 
               timesUp=true;  
-        
               timeOut();
               
             }
@@ -111,7 +110,7 @@ function openPage(){
     function timeOut(){
             resultsText.textContent ="TIME UP";
             resultsDiv.appendChild(resultsText);
-            textTimeout();
+            //textTimeout();
             
             index++;
             console.log("timeout incremented index, index is "+ index);
@@ -119,11 +118,11 @@ function openPage(){
             timer = timerNumber;
             console.log(timer +"... "+ timerNumber);
             showTimer();
-            //textTimeout();
+            textTimeout();
             //restartTimer();
 
     }
-    
+
 
     function nextQuestion(){
         var currentQuestion = questions[index];
@@ -180,22 +179,18 @@ function checkAnswer(event){
             
 
     }
-function textTimeout(){
-    var resultsInterval = setInterval(function(){
-        //decrease by 1
-        resultsTimer -- ;
-        //if time reach zero stop
-        if (resultsTimer === 0){
-            resultsText.textContent ="";
-        }
-    },1000)
-}
+ }
 
-
-        
-
+    function textTimeout(){
+        var resultsInterval = setInterval(function(){
+            //decrease by 1
+            resultsTimer -- ;
+            //if time reach zero stop
+            if (resultsTimer === 0){
+                resultsText.textContent ="";
+            }
+        },1000)
     }
-
     //add event listener
     startButton.addEventListener("click", startQuiz);
 
