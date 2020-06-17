@@ -35,6 +35,11 @@ var timerDisplay = document.querySelector(".timer");
 var resultsDiv = document.querySelector(".results");
 var finalresultsDiv = document.querySelector(".finalResults");
 
+//ok i am working here********
+var showleaderBoard = document.querySelector("leaderboardDiv");
+////leaderboard variables
+var leaders = [];
+
 var startText = document.createElement('h1');
 var startButton = document.createElement("button");
 //create p tag to display question
@@ -101,7 +106,7 @@ function showTimer(){
             //display to screen
         timerDisplay.textContent = timer;
             //if time reach zero stop
-         if (timer === 0){
+         if (timer <= 0){
             clearInterval(timeInterval);
                 // clearTimeout(timer); 
               timesUp=true;  
@@ -112,18 +117,19 @@ function showTimer(){
 }
 //function that handles and displays next Q
 //function to check answer and display
-function timeDecrease(){
-    timerNumber = timerNumber-5;
-    timerDisplay.textContent = timerNumber;
-    if (timerNumber === 0){
-    //clearInterval(timeInterval);
-    //timeOut();
+
+// function timeDecrease(){
+//     timerNumber = timerNumber-5;
+//     timerDisplay.textContent = timerNumber;
+//     if (timerNumber === 0){
+//     //clearInterval(timeInterval);
+//     //timeOut();
     
-    timerNumber = 20; 
-    restartTimer();
-    index++;
-    }  
- }
+//     timerNumber = 20; 
+//     restartTimer();
+//     index++;
+//     }  
+//  }
 
 function restartTimer(){
             timer= timerNumber;
@@ -185,24 +191,30 @@ function checkAnswer(event){
             score=score+10;
             console.log("score= " + score );
             index++;
+//if answer is wrong********************************************************************
                 }else if (event.target.textContent!=questions[index].answer){
             //hmmmmmm
             //timerDisplay=timer-5;
-            timeDecrease();
+            timerNumber =timerNumber-5;
+            timerDisplay.textContent=timerNumber;
+            //timeDecrease();***
             resultsText.textContent ="WRONG";
             resultsDiv.appendChild(resultsText);           
             textTimeout();
+            index++;
                     }
      //old
          //index ++;
 
-    if(index != questions.length){
-        console.log("checkAnswer incremented index, index is " + index);
+    if(index != questions.length && timerNumber > 0){
 
+        console.log("checkAnswer incremented index, index is " + index);
+       //index++
         nextQuestion();
-        restartTimer();
+       // restartTimer();
             }else{
         lastPage();
+
         }
     }
  }
@@ -233,6 +245,11 @@ function lastPage(){
     console.log("last page runnin")
     }
 
+function renderleaderBoard(){
+        showleaderBoard.innerHTML = "";
+       // todoCountSpan.textContent = leaders.length;
+}
+
 //add event listener
 startButton.addEventListener("click", startQuiz);
 
@@ -243,3 +260,11 @@ document.addEventListener("click", checkAnswer);
 openPage();
     //lastPage();
     // textTimeout();
+
+
+
+//******************the things i need***************************************************************************
+    //need leaderboard***********************************************(use bootstrap)
+    //need css format******************************
+    //view highscores****************
+     //need restart quiz*****
