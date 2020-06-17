@@ -15,6 +15,18 @@ var questions = [
         title: "Example Question 3:",
         choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
         answer: "Choice 1"
+      },
+
+      {
+        title: "Example Question 4:",
+        choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
+        answer: "Choice 1"
+      },
+
+      {
+        title: "Example Question 5:",
+        choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
+        answer: "Choice 1"
       }
   ];
 
@@ -44,8 +56,8 @@ var index = 0;
 //timer for results
 var resultsTimer=1;
 
-//////???
-var score;
+//////???add this 
+var score=0;
 
 //////////////////functions///////////////////
 
@@ -69,8 +81,7 @@ function startQuiz(){
 //show timer function
     if(event.target.matches("#startBtn")){
         showTimer();
-        nextQuestion();
-        
+        nextQuestion();        
 }
     }
     
@@ -80,10 +91,12 @@ function showTimer(){
     timerDisplay.textContent = timerNumber;
         //create set interval and store in variable
         //variable because need to clear
-    var timeInterval = setInterval(function(){
+//if(timesUp===false){
+     timeInterval = setInterval(function(){
             //decrease by 1
-            console.log("doin a decrease");
-            console.log(index);
+            console.log(timesUp + "times up");
+           // console.log("doin a decrease");
+           // console.log(index);
         timer = timer-1;
             //display to screen
         timerDisplay.textContent = timer;
@@ -95,6 +108,7 @@ function showTimer(){
               timeOut();          
         }
     },1000);
+    //}
 }
     //function that handles and displays next Q
 
@@ -164,15 +178,17 @@ function checkAnswer(event){
         // index ++;
         // console.log("checkAnswer incremented index, index is " + index);
         // nextQuestion();
-        // restartTimer();
+        
         // lastPage();
         //console.log(timer);
-        // index ++;
+         index ++;
+         //restartTimer();
+         //nextQuestion();
     if(index != questions.length){
         console.log("checkAnswer incremented index, index is " + index);
-        index ++;
+      //  index ++;
         nextQuestion();
-        restartTimer();
+       restartTimer();
         }else{
         // console.log("checkAnswer incremented index, index is " + index);
         // nextQuestion();
@@ -189,13 +205,16 @@ function textTimeout(){
 //if time reach zero stop
     if (resultsTimer === 0){
     resultsText.textContent ="";
+    resultsTimer=1;
+    clearInterval(resultsInterval);
             }
         },1000)
     }
 
 function lastPage(){
-    //console.log("it is" + questions.length);
-        // if(index === questions.length){        
+    
+    timesUp=true; 
+    clearInterval(timeInterval);
     containerE1.textContent = "";
     timerDisplay.textContent="";
     resultsDiv.textContent="";
