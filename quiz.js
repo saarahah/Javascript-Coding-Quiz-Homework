@@ -21,6 +21,7 @@ var questions = [
 var containerE1 = document.querySelector (".container");
 var timerDisplay = document.querySelector(".timer");
 var resultsDiv = document.querySelector(".results");
+var finalresultsDiv = document.querySelector(".finalResults");
 
 var startText = document.createElement('h1');
 var startButton = document.createElement("button");
@@ -28,6 +29,9 @@ var startButton = document.createElement("button");
 var questionText = document.createElement("p");
 //p tag to display results
 var resultsText = document.createElement("p");
+
+var finalresultsText = document.createElement("h1");
+
 
 //variable to store time
 
@@ -41,6 +45,9 @@ var index = 0;
 
 //timer for results
 var resultsTimer=1;
+
+//////???
+var score;
 
 //////////////////functions///////////////////
 
@@ -60,6 +67,10 @@ function openPage(){
     containerE1.appendChild(startButton);
 }
 
+function resultsPage(){
+
+}
+
     //function that shows the question and begins timer
 
      function startQuiz(){
@@ -73,7 +84,6 @@ function openPage(){
     
     //function that handles timer
     function showTimer(){
-        // timer=75;
         //display time on screen
     timerDisplay.textContent = timerNumber;
         //create set interval and store in variable
@@ -95,8 +105,6 @@ function openPage(){
               
             }
         },1000);
-       //inside
-       //  nextQuestion();
     }
     //function that handles and displays next Q
 
@@ -114,11 +122,18 @@ function openPage(){
             
             index++;
             console.log("timeout incremented index, index is "+ index);
-            nextQuestion();
-            timer = timerNumber;
-            console.log(timer +"... "+ timerNumber);
-            showTimer();
-            textTimeout();
+            if (index === questions.length){
+                lastPage();
+            } else {
+                nextQuestion();
+                timer = timerNumber;
+                console.log(timer +"... "+ timerNumber);
+                showTimer();
+                textTimeout();
+            }
+            
+           
+          
             //restartTimer();
 
     }
@@ -170,13 +185,33 @@ function checkAnswer(event){
             textTimeout();
     }
          //logic to check answer
-        index ++;
-        console.log("checkAnswer incremented index, index is " + index);
-        nextQuestion();
-        restartTimer();
+        // index ++;
+        // console.log("checkAnswer incremented index, index is " + index);
+        // nextQuestion();
+        // restartTimer();
+        // lastPage();
         //console.log(timer);
             
-            
+     
+         
+     
+        index ++;
+
+
+        if(index != questions.length){
+            console.log("checkAnswer incremented index, index is " + index);
+        nextQuestion();
+        restartTimer();
+
+
+        }else{
+        // console.log("checkAnswer incremented index, index is " + index);
+        // nextQuestion();
+        // restartTimer();
+        lastPage();
+
+        
+        }
 
     }
  }
@@ -191,6 +226,23 @@ function checkAnswer(event){
             }
         },1000)
     }
+
+    function lastPage(){
+    //    console.log("it is" + questions.length);
+        // if(index === questions.length){
+            
+            containerE1.textContent = "";
+            timerDisplay.textContent="";
+            resultsDiv.textContent="";
+
+            finalresultsText.textContent = "High Score";
+            containerE1.appendChild(finalresultsText);
+            
+            
+            console.log("last page runnin")
+        // }
+
+    }
     //add event listener
     startButton.addEventListener("click", startQuiz);
 
@@ -200,4 +252,5 @@ function checkAnswer(event){
 
 
     openPage();
+    //lastPage();
     // textTimeout();
