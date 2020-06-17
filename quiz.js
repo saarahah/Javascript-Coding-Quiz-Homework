@@ -32,7 +32,7 @@ var resultsText = document.createElement("p");
 //variable to store time
 
 var timesUp=false;
-var timerNumber= 10;
+var timerNumber= 4;
 var timer = timerNumber;
 
 
@@ -102,26 +102,25 @@ function openPage(){
     //function that handles and displays next Q
 
     function restartTimer(){
-        if (index===index+1){
             timer= timerNumber;
+            timerDisplay.textContent = timerNumber;
             timesUp=false;
             console.log("reset timer did the thing")
-            
-        }
       }
 
     function timeOut(){
-        if (timesUp===true){
             resultsText.textContent ="TIME UP";
             resultsDiv.appendChild(resultsText);
+            textTimeout();
             
             index++;
             console.log("timeout incremented index, index is "+ index);
             nextQuestion();
+            timer = timerNumber;
+            console.log(timer +"... "+ timerNumber);
+            showTimer();
             //textTimeout();
-            restartTimer();
-            
-        }
+            //restartTimer();
 
     }
     
