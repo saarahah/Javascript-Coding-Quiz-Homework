@@ -32,9 +32,7 @@ var resultsText = document.createElement("p");
 
 var finalresultsText = document.createElement("h1");
 
-
 //variable to store time
-
 var timesUp=false;
 var timerNumber= 4;
 var timer = timerNumber;
@@ -67,23 +65,21 @@ function openPage(){
     containerE1.appendChild(startButton);
 }
 
-function resultsPage(){
 
-}
 
     //function that shows the question and begins timer
 
-     function startQuiz(){
-        //show timer function
-        if(event.target.matches("#startBtn")){
+function startQuiz(){
+//show timer function
+    if(event.target.matches("#startBtn")){
         showTimer();
         nextQuestion();
         
-     }
+}
     }
     
     //function that handles timer
-    function showTimer(){
+function showTimer(){
         //display time on screen
     timerDisplay.textContent = timerNumber;
         //create set interval and store in variable
@@ -103,19 +99,19 @@ function resultsPage(){
               timesUp=true;  
               timeOut();
               
-            }
-        },1000);
-    }
+        }
+    },1000);
+}
     //function that handles and displays next Q
 
-    function restartTimer(){
+function restartTimer(){
             timer= timerNumber;
             timerDisplay.textContent = timerNumber;
             timesUp=false;
             console.log("reset timer did the thing")
-      }
+}
 
-    function timeOut(){
+function timeOut(){
             resultsText.textContent ="TIME UP";
             resultsDiv.appendChild(resultsText);
             //textTimeout();
@@ -124,23 +120,18 @@ function resultsPage(){
             console.log("timeout incremented index, index is "+ index);
             if (index === questions.length){
                 lastPage();
-            } else {
+        } else {
                 nextQuestion();
                 timer = timerNumber;
                 console.log(timer +"... "+ timerNumber);
                 showTimer();
                 textTimeout();
-            }
-            
-           
-          
-            //restartTimer();
-
     }
+}
 
 
-    function nextQuestion(){
-        var currentQuestion = questions[index];
+function nextQuestion(){
+    var currentQuestion = questions[index];
         //empty container element erase
         containerE1.textContent = "";
         //add current question title to question display var
@@ -156,34 +147,27 @@ function resultsPage(){
             answerButton.classList.add("choiceBtn");
             answerButton.textContent = currentQuestion.choices[i];
             answersDiv.appendChild(answerButton);
-
-        }
-
+    }
         //append div to container
         containerE1.appendChild(answersDiv);
-
-    };
+};
 
     //function to check answer and display
-function checkAnswer(event){
-   
-        //if event.target matches class choice button
+function checkAnswer(event){  
+//if event.target matches class choice button
     if (event.target.matches(".choiceBtn")){
-    
         if(event.target.textContent==questions[index].answer){
             
-            //add correct
+//add correct
             resultsText.textContent ="correct!";
             resultsDiv.appendChild(resultsText);
             textTimeout();
-
-     }  else {
-     // if (event.target.textContent!=questions[index].answer){
-        
+                }else{
+// if (event.target.textContent!=questions[index].answer){
             resultsText.textContent ="WRONG";
             resultsDiv.appendChild(resultsText);
             textTimeout();
-    }
+                    }
          //logic to check answer
         // index ++;
         // console.log("checkAnswer incremented index, index is " + index);
@@ -191,67 +175,52 @@ function checkAnswer(event){
         // restartTimer();
         // lastPage();
         //console.log(timer);
-            
-     
-         
-     
         // index ++;
-
-
-        if(index != questions.length){
-            console.log("checkAnswer incremented index, index is " + index);
+    if(index != questions.length){
+        console.log("checkAnswer incremented index, index is " + index);
         index ++;
         nextQuestion();
         restartTimer();
-
-
         }else{
         // console.log("checkAnswer incremented index, index is " + index);
         // nextQuestion();
         // restartTimer();
         lastPage();
-
-        
         }
-
     }
  }
 
-    function textTimeout(){
-        var resultsInterval = setInterval(function(){
-            //decrease by 1
-            resultsTimer -- ;
-            //if time reach zero stop
-            if (resultsTimer === 0){
-                resultsText.textContent ="";
+function textTimeout(){
+    var resultsInterval = setInterval(function(){
+//decrease by 1
+    resultsTimer -- ;
+//if time reach zero stop
+    if (resultsTimer === 0){
+    resultsText.textContent ="";
             }
         },1000)
     }
 
-    function lastPage(){
+function lastPage(){
     //    console.log("it is" + questions.length);
-        // if(index === questions.length){
-            
-            containerE1.textContent = "";
-            timerDisplay.textContent="";
-            resultsDiv.textContent="";
-
-            finalresultsText.textContent = "High Score";
-            containerE1.appendChild(finalresultsText);
-            
-            
-            console.log("last page runnin")
-        // }
-
+        // if(index === questions.length){        
+    containerE1.textContent = "";
+    timerDisplay.textContent="";
+    resultsDiv.textContent="";
+    finalresultsText.textContent = "High Score";
+    containerE1.appendChild(finalresultsText);
+    console.log("last page runnin")
     }
-    //add event listener
-    startButton.addEventListener("click", startQuiz);
-
-    //event listen for choice
-    //hook up to whole element, button is not yet created
-    document.addEventListener("click", checkAnswer);
 
 
-    openPage();
+//add event listener
+startButton.addEventListener("click", startQuiz);
+
+//event listen for choice
+//hook up to whole element, button is not yet created
+document.addEventListener("click", checkAnswer);
+
+
+openPage();
     //lastPage();
     // textTimeout();
