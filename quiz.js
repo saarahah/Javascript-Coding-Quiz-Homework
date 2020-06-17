@@ -3,13 +3,19 @@ var questions = [
     {
       title: "Example Question 1:",
       choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-      answer: "Choice 2"
+      answer: "Choice 1"
     },
     {
       title: "Example Question 2:",
       choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-      answer: "Choice 3"
-    }
+      answer: "Choice 1"
+    },
+
+    {
+        title: "Example Question 3:",
+        choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
+        answer: "Choice 1"
+      }
   ];
 
 var containerE1 = document.querySelector (".container");
@@ -24,8 +30,10 @@ var questionText = document.createElement("p");
 var resultsText = document.createElement("p");
 
 //variable to store time
-var timer = 75;
+
 var timesUp=false;
+var timerNumber= 10;
+var timer = timerNumber;
 
 
 //var to store current index
@@ -62,38 +70,43 @@ function openPage(){
         
      }
     }
-
+    
     //function that handles timer
     function showTimer(){
-
+        // timer=75;
         //display time on screen
-    timerDisplay.textContent = 75;
+    timerDisplay.textContent = timerNumber;
         //create set interval and store in variable
         //variable because need to clear
     var timeInterval = setInterval(function(){
             //decrease by 1
+            console.log("doin a decrease");
+            console.log(index);
+        
         timer = timer-1;
             //display to screen
         timerDisplay.textContent = timer;
             //if time reach zero stop
          if (timer === 0){
-                clearInterval(timeInterval);
+            clearInterval(timeInterval);
                 // clearTimeout(timer); 
               timesUp=true;  
+        
               timeOut();
               
             }
-        },100);
+        },1000);
        //inside
-        // nextQuestion();
+       //  nextQuestion();
     }
     //function that handles and displays next Q
 
     function restartTimer(){
-        if (index=index+1){
-            timer= 75;
-            showTimer();
-            console.log (index);
+        if (index===index+1){
+            timer= timerNumber;
+            timesUp=false;
+            console.log("reset timer did the thing")
+            
         }
       }
 
@@ -103,8 +116,9 @@ function openPage(){
             resultsDiv.appendChild(resultsText);
             
             index++;
+            console.log("timeout incremented index, index is "+ index);
             nextQuestion();
-            // textTimeout();
+            //textTimeout();
             restartTimer();
             
         }
@@ -143,38 +157,30 @@ function checkAnswer(event){
         //if event.target matches class choice button
     if (event.target.matches(".choiceBtn")){
     
-
-        //    if (".choicebtn"===currentQuestion.answer){
-            //console.log(event.target.textContent);
-        // for (let i = 0; i < 100; i++){
-    if(event.target.textContent==questions[index].answer){
+        if(event.target.textContent==questions[index].answer){
             
-     //add correct
-        resultsText.textContent ="correct!";
-        resultsDiv.appendChild(resultsText);
-        textTimeout();
+            //add correct
+            resultsText.textContent ="correct!";
+            resultsDiv.appendChild(resultsText);
+            textTimeout();
 
-     }else if (event.target.textContent!=questions[index].answer){
+     }  else {
+     // if (event.target.textContent!=questions[index].answer){
         
-        console.log(timesUp);
-
-        resultsText.textContent ="WRONG";
-        resultsDiv.appendChild(resultsText);
-        textTimeout();
-
-           
-        }
- 
-            //logic to check answer
-
-            index ++;
-            
-            nextQuestion();
-            restartTimer();
+            resultsText.textContent ="WRONG";
+            resultsDiv.appendChild(resultsText);
+            textTimeout();
+    }
+         //logic to check answer
+        index ++;
+        console.log("checkAnswer incremented index, index is " + index);
+        nextQuestion();
+        restartTimer();
+        //console.log(timer);
             
             
 
-        }
+    }
 function textTimeout(){
     var resultsInterval = setInterval(function(){
         //decrease by 1
@@ -200,3 +206,4 @@ function textTimeout(){
 
 
     openPage();
+    // textTimeout();
