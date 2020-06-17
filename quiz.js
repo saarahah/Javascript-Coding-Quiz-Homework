@@ -93,16 +93,20 @@ function startQuiz(){
 //function that handles timer
 function showTimer(){
         //display time on screen
-    timerDisplay.textContent = timerNumber;
+    timerDisplay.textContent = timer;
         //create set interval and store in variable
         //variable because need to clear
 //if(timesUp===false){
      timeInterval = setInterval(function(){
             //decrease by 1
-            console.log(timesUp + "times up");
+            console.log("timerNumber is " + timerNumber +", timer is " + timer);
            // console.log("doin a decrease");
            // console.log(index);
+    if (timer-1 >= 0){
         timer = timer-1;
+        }else{
+            timer=0;
+        }
             //display to screen
         timerDisplay.textContent = timer;
             //if time reach zero stop
@@ -131,12 +135,12 @@ function showTimer(){
 //     }  
 //  }
 
-function restartTimer(){
-            timer= timerNumber;
-            timerDisplay.textContent = timerNumber;
-            timesUp=false;
-            console.log("reset timer did the thing")
-}
+// function restartTimer(){
+//             timer= timerNumber;
+//             timerDisplay.textContent = timerNumber;
+//             timesUp=false;
+//             console.log("reset timer did the thing")
+// }
 
 function timeOut(){
     resultsText.textContent ="TIME UP";
@@ -188,15 +192,20 @@ function checkAnswer(event){
             resultsText.textContent ="correct!";
             resultsDiv.appendChild(resultsText);
             textTimeout();
-            score=score+10;
+            
             console.log("score= " + score );
             index++;
 //if answer is wrong********************************************************************
                 }else if (event.target.textContent!=questions[index].answer){
             //hmmmmmm
             //timerDisplay=timer-5;
-            timerNumber =timerNumber-5;
-            timerDisplay.textContent=timerNumber;
+           // timerNumber =timerNumber-5;
+    if(timer-5 >= 0){
+           timer =timer-5;
+        }else{
+            timer =0;
+           }
+            timerDisplay.textContent=timer;
             //timeDecrease();***
             resultsText.textContent ="WRONG";
             resultsDiv.appendChild(resultsText);           
@@ -239,6 +248,7 @@ function lastPage(){
     timerDisplay.textContent="";
     resultsDiv.textContent="";
     finalresultsText.textContent = "High Score";
+    score=timer;
     finalscoreText.textContent = "Your Final Score is " + score;
     containerE1.appendChild(finalresultsText);
     containerE1.appendChild(finalscoreText);
