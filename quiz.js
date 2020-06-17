@@ -60,15 +60,11 @@ function openPage(){
     startButton.id="startBtn";
 
     //append text to container
-
     containerE1.appendChild(startText);
     containerE1.appendChild(startButton);
 }
 
-
-
-    //function that shows the question and begins timer
-
+//function that shows the question and begins timer
 function startQuiz(){
 //show timer function
     if(event.target.matches("#startBtn")){
@@ -78,7 +74,7 @@ function startQuiz(){
 }
     }
     
-    //function that handles timer
+//function that handles timer
 function showTimer(){
         //display time on screen
     timerDisplay.textContent = timerNumber;
@@ -88,7 +84,6 @@ function showTimer(){
             //decrease by 1
             console.log("doin a decrease");
             console.log(index);
-        
         timer = timer-1;
             //display to screen
         timerDisplay.textContent = timer;
@@ -97,8 +92,7 @@ function showTimer(){
             clearInterval(timeInterval);
                 // clearTimeout(timer); 
               timesUp=true;  
-              timeOut();
-              
+              timeOut();          
         }
     },1000);
 }
@@ -112,23 +106,22 @@ function restartTimer(){
 }
 
 function timeOut(){
-            resultsText.textContent ="TIME UP";
-            resultsDiv.appendChild(resultsText);
-            //textTimeout();
+    resultsText.textContent ="TIME UP";
+    resultsDiv.appendChild(resultsText);
+        //textTimeout();
             
-            index++;
-            console.log("timeout incremented index, index is "+ index);
-            if (index === questions.length){
-                lastPage();
-        } else {
-                nextQuestion();
-                timer = timerNumber;
-                console.log(timer +"... "+ timerNumber);
-                showTimer();
-                textTimeout();
+    index++;
+    console.log("timeout incremented index, index is "+ index);
+    if (index === questions.length){
+        lastPage();
+        }else{
+            nextQuestion();
+            timer = timerNumber;
+            console.log(timer +"... "+ timerNumber);
+            showTimer();
+            textTimeout();
     }
 }
-
 
 function nextQuestion(){
     var currentQuestion = questions[index];
@@ -152,12 +145,11 @@ function nextQuestion(){
         containerE1.appendChild(answersDiv);
 };
 
-    //function to check answer and display
+//function to check answer and display
 function checkAnswer(event){  
 //if event.target matches class choice button
     if (event.target.matches(".choiceBtn")){
-        if(event.target.textContent==questions[index].answer){
-            
+        if(event.target.textContent==questions[index].answer){           
 //add correct
             resultsText.textContent ="correct!";
             resultsDiv.appendChild(resultsText);
@@ -202,7 +194,7 @@ function textTimeout(){
     }
 
 function lastPage(){
-    //    console.log("it is" + questions.length);
+    //console.log("it is" + questions.length);
         // if(index === questions.length){        
     containerE1.textContent = "";
     timerDisplay.textContent="";
@@ -212,14 +204,12 @@ function lastPage(){
     console.log("last page runnin")
     }
 
-
 //add event listener
 startButton.addEventListener("click", startQuiz);
 
 //event listen for choice
 //hook up to whole element, button is not yet created
 document.addEventListener("click", checkAnswer);
-
 
 openPage();
     //lastPage();
