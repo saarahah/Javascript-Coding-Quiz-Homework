@@ -292,7 +292,6 @@ function runLeaderboard(){
     // When form is submitted...
 leaderForm.addEventListener("submit", function(event) {
     event.preventDefault();
-  
     var leaderText = leaderInput.value.trim();
   
     // Return from function early if submitted leadertext is blank
@@ -335,16 +334,6 @@ startButton.addEventListener("click", startQuiz);
 document.addEventListener("click", checkAnswer);
 
 openPage();
-
-
-
-
-
-
-
-
-
-
 
 
 //******************the things i need***************************************************************************
