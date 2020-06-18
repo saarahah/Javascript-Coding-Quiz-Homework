@@ -1,32 +1,32 @@
 //var questions up here
 var questions = [
     {
-      title: "Example Question 1:",
-      choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-      answer: "Choice 1"
+      title: "Commonly used data types do not include:",
+      choices: ["Strings", "Booleans", "Alerts", "Numbers"],
+      answer: "Alerts"
     },
     {
-      title: "Example Question 2:",
-      choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-      answer: "Choice 1"
+      title: "The condition in an if / else statement is enclosed within ____:",
+      choices: ["Quotes", "Curly Brackets", "Parentheses", "Square Brackets"],
+      answer: "Parentheses"
     },
 
     {
-        title: "Example Question 3:",
-        choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-        answer: "Choice 1"
+        title: "Arrays in Javascript can be used to store _____:",
+        choices: ["Numbers and strings", "Other arrays", "Booleans", "All the above"],
+        answer: "All the above"
       },
 
       {
-        title: "Example Question 4:",
-        choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-        answer: "Choice 1"
+        title: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        choices: ["Javascript", "Terminal/bash", "For loops", "Console.log"],
+        answer: "Console.log"
       },
 
       {
-        title: "Example Question 5:",
-        choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-        answer: "Choice 1"
+        title: "String values must be enclosed within _____ when being assigned to variables:",
+        choices: ["Commas", "Curly brackets", "Quotes", "Parentheses"],
+        answer: "Quotes"
       }
   ];
 /////////////
@@ -57,7 +57,7 @@ var finalscoreText = document.createElement("p");
 
 //variable to store time
 var timesUp=false;
-var timerNumber= 20;
+var timerNumber= 75;
 var timer = timerNumber;
 
 //var to store current index
@@ -117,7 +117,8 @@ function showTimer(){
          if (timer <= 0){
             clearInterval(timeInterval); 
               timesUp=true;  
-              timeOut();          
+              timeOut();     
+              console.log("timeout");     
         }
     },1000);
     
@@ -129,15 +130,15 @@ function timeOut(){
     resultsDiv.appendChild(resultsText);           
     index++;
     console.log("timeout incremented index, index is "+ index);
-    if (index === questions.length){
+    // if (index === questions.length){
         lastPage();
-        }else{
-            nextQuestion();
-            timer = timerNumber;
-            console.log(timer +"... "+ timerNumber);
-            showTimer();
+        // }else{
+            //nextQuestion();
+            //timer = timerNumber;
+            //console.log(timer +"... "+ timerNumber);
+            //showTimer();
             textTimeout();
-    }
+    // }
 }
 
 function nextQuestion(){

@@ -24,7 +24,9 @@ h1{
 button{
 
     /* float: right; */
-    border: none;
+    border: lightcyan;
+    border-width: 2px;
+    margin: 3px;
     height: 40px;
     cursor: pointer;
     background-color: slateblue;
@@ -72,7 +74,9 @@ li::after {
 
 li button {
   float: right;
-  border: none;
+  border: lightcyan;
+  border-width: 2px;
+  margin: 3px;
   height: 40px;
   cursor: pointer;
   background-color: slateblue;
