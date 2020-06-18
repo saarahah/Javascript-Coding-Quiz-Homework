@@ -31,6 +31,14 @@ var questions = [
   ];
 /////////////
   var leaderForm = document.createElement("FORM");
+  var leaderLabel = document.createElement("label");
+  var leaderInput = document.createElement("input");
+  var leaderP = document.createElement("P");
+  var leaderSpan = document.createElement("span");
+  //var leaderList = document.querySelector("leader-list");
+  var leaderUL = document.createElement("ul");
+  var leader = [];
+  var leaderboardDiv = document.querySelector(".leader");
 
 
 var containerE1 = document.querySelector (".container");
@@ -49,7 +57,7 @@ var finalresultsDiv = document.querySelector(".finalResults");
 // var leaderCountSpan = document.querySelector("#leader-count");
 
 //var leaderboardDiv = document.querySelector(".leader");
-var leader = [];
+
 
 var startText = document.createElement('h1');
 var startButton = document.createElement("button");
@@ -265,6 +273,7 @@ function lastPage(){
     containerE1.appendChild(finalscoreText);
     //renderLeader();
    // LeaderBoard();
+   init();
    runLeaderboard();
  
 
@@ -281,12 +290,12 @@ function lastPage(){
 
 function renderLeader() {
     // Clear todoList element and update todoCountSpan
-    var leaderboardDiv = document.querySelector(".leader");
+    // var leaderboardDiv = document.querySelector(".leader");
     // var leaderList = document.querySelector("#leader-list");
    // containerE1.appendChild(leaderboardDiv);
 
 
-var leader = [];
+// var leader = [];
 
 
 //    var leaderForm = document.createElement("FORM");
@@ -295,29 +304,29 @@ var leader = [];
     leaderForm.method='POST';
     leaderboardDiv.appendChild(leaderForm);
     
-    var leaderLabel = document.createElement("label");
+    // var leaderLabel = document.createElement("label");
     leaderForm.appendChild(leaderLabel);
     leaderLabel.textContent= "Add Your Name: ";
 
-     var leaderInput = document.createElement("input");
+    //  var leaderInput = document.createElement("input");
      leaderForm.appendChild(leaderInput);
      leaderInput.id = "leader-text";
      leaderInput.name = "leader-text";
 
-     var leaderP = document.createElement("P");
+    //  var leaderP = document.createElement("P");
      leaderP.textContent = "Leaders ";
      leaderboardDiv.appendChild(leaderP);
 
-     var leaderSpan = document.createElement("span");
+    //  var leaderSpan = document.createElement("span");
      leaderSpan.id = "leader-count";
      leaderP.appendChild(leaderSpan);
      leaderSpan.textContent = "0";
 
-     var leaderUL = document.createElement("ul");
+    //  var leaderUL = document.createElement("ul");
      leaderUL.id="leader-list";
      leaderboardDiv.appendChild(leaderUL);
 
-     var leaderList = document.querySelector("#leader-list");
+    //  var leaderList = document.querySelector("#leader-list");
      
 
      leaderUL.innerHTML = "";
@@ -327,17 +336,17 @@ var leader = [];
 
     // Render a new li for each todo
      for (var i = 0; i < leader.length; i++) {
-       var leader = leader[i];
+       var leader1 = leader[i];
   
        var li = document.createElement("li");
-       li.textContent = leader;
+       li.textContent = leader1;
        li.setAttribute("data-index", i);
   
        var button = document.createElement("button");
        button.textContent = "Complete";
   
        li.appendChild(button);
-       leaderList.appendChild(li);
+       leaderUL.appendChild(li);
       
     }
    console.log("leaderboard running");
@@ -385,7 +394,7 @@ leaderForm.addEventListener("submit", function(event) {
   });
   
   // When a element inside of the todoList is clicked...
-    leaderList.addEventListener("click", function(event) {
+    leaderUL.addEventListener("click", function(event) {
     var element = event.target;
   
     // If that element is a button...
