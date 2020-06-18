@@ -130,15 +130,8 @@ function timeOut(){
     resultsDiv.appendChild(resultsText);           
     index++;
     console.log("timeout incremented index, index is "+ index);
-    // if (index === questions.length){
         lastPage();
-        // }else{
-            //nextQuestion();
-            //timer = timerNumber;
-            //console.log(timer +"... "+ timerNumber);
-            //showTimer();
-            textTimeout();
-    // }
+        textTimeout();
 }
 
 function nextQuestion(){
@@ -356,11 +349,4 @@ openPage();
 
 //******************the things i need***************************************************************************
     
-    //need css format******************************
-
-
-
-
-
-    //view highscores****************
-     //need restart quiz*****
+//done :)
