@@ -29,15 +29,18 @@ var questions = [
         answer: "Quotes"
       }
   ];
-/////////////
-  var leaderForm = document.createElement("FORM");
-  var leaderLabel = document.createElement("label");
-  var leaderInput = document.createElement("input");
-  var leaderP = document.createElement("P");
-  var leaderSpan = document.createElement("span");
-  var leaderUL = document.createElement("ul");
-  var leader = [];
-  var leaderboardDiv = document.querySelector(".leader");
+
+var correctSound=new sound ("./SOUNDS/correctsound.mp3");
+var wrongSound = new sound ("./SOUNDS/wrongsound.mp3");
+  ///////////// variables for leaderboard
+var leaderForm = document.createElement("FORM");
+var leaderLabel = document.createElement("label");
+var leaderInput = document.createElement("input");
+var leaderP = document.createElement("P");
+var leaderSpan = document.createElement("span");
+var leaderUL = document.createElement("ul");
+var leader = [];
+var leaderboardDiv = document.querySelector(".leader");
 
 
 var containerE1 = document.querySelector (".container");
@@ -124,7 +127,7 @@ function showTimer(){
     
 }
 
-
+//function for when time runs out
 function timeOut(){
     resultsText.textContent ="TIME UP";
     resultsDiv.appendChild(resultsText);           
@@ -134,6 +137,7 @@ function timeOut(){
         textTimeout();
 }
 
+//function to display next question
 function nextQuestion(){
     var currentQuestion = questions[index];
         //empty container element erase
@@ -157,12 +161,13 @@ function nextQuestion(){
 };
 
 
-
+//function to check whether answer is right or wrong
 function checkAnswer(event){  
 //if event.target matches class choice button
     if (event.target.matches(".choiceBtn")){
         if(event.target.textContent==questions[index].answer){           
 //add correct
+            correctSound.play();
             resultsText.textContent ="correct!";
             resultsDiv.appendChild(resultsText);
             textTimeout();
@@ -178,6 +183,7 @@ function checkAnswer(event){
            }
             timerDisplay.textContent=timer;
             //timeDecrease();***
+            wrongSound.play();
             resultsText.textContent ="WRONG";
             resultsDiv.appendChild(resultsText);           
             textTimeout();
@@ -195,6 +201,7 @@ function checkAnswer(event){
     }
  }
 
+ //time out for results text
 function textTimeout(){
     var resultsInterval = setInterval(function(){
 //decrease by 1
@@ -207,7 +214,7 @@ function textTimeout(){
             }
     },1000)
 }
-
+//function to display the last leaderboard page
 function lastPage(){    
     timesUp=true; 
     clearInterval(timeInterval);
@@ -225,7 +232,7 @@ function lastPage(){
 
     console.log("last page runnin")
     }
-
+//function to show the leader board add to it and store names and scores
 function renderLeader() {
 
     leaderForm.id = "leader-form";
@@ -325,6 +332,23 @@ leaderForm.addEventListener("submit", function(event) {
   });
 
 }
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
+
+
 
 //add event listener
 startButton.addEventListener("click", startQuiz);
