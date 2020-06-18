@@ -29,6 +29,9 @@ var questions = [
         answer: "Choice 1"
       }
   ];
+/////////////
+  var leaderForm = document.createElement("FORM");
+
 
 var containerE1 = document.querySelector (".container");
 var timerDisplay = document.querySelector(".timer");
@@ -36,9 +39,17 @@ var resultsDiv = document.querySelector(".results");
 var finalresultsDiv = document.querySelector(".finalResults");
 
 //ok i am working here********
-var showleaderBoard = document.querySelector("leaderboardDiv");
-////leaderboard variables
-var leaders = [];
+// var showleaderBoard = document.querySelector("leaderboardDiv");
+// ////leaderboard variables
+// var leaders = [];
+
+// var leaderInput = document.querySelector("#leader-text");
+// var leaderForm = document.querySelector("#leader-form");
+// var leaderList = document.querySelector("#leader-list");
+// var leaderCountSpan = document.querySelector("#leader-count");
+
+//var leaderboardDiv = document.querySelector(".leader");
+var leader = [];
 
 var startText = document.createElement('h1');
 var startButton = document.createElement("button");
@@ -252,13 +263,147 @@ function lastPage(){
     finalscoreText.textContent = "Your Final Score is " + score;
     containerE1.appendChild(finalresultsText);
     containerE1.appendChild(finalscoreText);
+    //renderLeader();
+   // LeaderBoard();
+   runLeaderboard();
+ 
+
     console.log("last page runnin")
     }
 
-function renderleaderBoard(){
-        showleaderBoard.innerHTML = "";
-       // todoCountSpan.textContent = leaders.length;
+// function renderleaderBoard(){
+//         showleaderBoard.innerHTML = "";
+//        // todoCountSpan.textContent = leaders.length;
+// }
+
+
+//function LeaderBoard(){
+
+function renderLeader() {
+    // Clear todoList element and update todoCountSpan
+    var leaderboardDiv = document.querySelector(".leader");
+    // var leaderList = document.querySelector("#leader-list");
+   // containerE1.appendChild(leaderboardDiv);
+
+
+var leader = [];
+
+
+//    var leaderForm = document.createElement("FORM");
+
+    leaderForm.id = "leader-form";
+    leaderForm.method='POST';
+    leaderboardDiv.appendChild(leaderForm);
+    
+    var leaderLabel = document.createElement("label");
+    leaderForm.appendChild(leaderLabel);
+    leaderLabel.textContent= "Add Your Name: ";
+
+     var leaderInput = document.createElement("input");
+     leaderForm.appendChild(leaderInput);
+     leaderInput.id = "leader-text";
+     leaderInput.name = "leader-text";
+
+     var leaderP = document.createElement("P");
+     leaderP.textContent = "Leaders ";
+     leaderboardDiv.appendChild(leaderP);
+
+     var leaderSpan = document.createElement("span");
+     leaderSpan.id = "leader-count";
+     leaderP.appendChild(leaderSpan);
+     leaderSpan.textContent = "0";
+
+     var leaderUL = document.createElement("ul");
+     leaderUL.id="leader-list";
+     leaderboardDiv.appendChild(leaderUL);
+
+     var leaderList = document.querySelector("#leader-list");
+     
+
+     leaderUL.innerHTML = "";
+     leaderSpan.textContent = leader.length;
+    console.log ("render leader ran");
+
+
+    // Render a new li for each todo
+     for (var i = 0; i < leader.length; i++) {
+       var leader = leader[i];
+  
+       var li = document.createElement("li");
+       li.textContent = leader;
+       li.setAttribute("data-index", i);
+  
+       var button = document.createElement("button");
+       button.textContent = "Complete";
+  
+       li.appendChild(button);
+       leaderList.appendChild(li);
+      
+    }
+   console.log("leaderboard running");
+  }
+
+  function init() {
+    // Get stored todos from localStorage
+    // Parsing the JSON string to an object
+    var storedLeader = JSON.parse(localStorage.getItem("leader"));
+  
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (storedLeader !== null) {
+      leader = storedLeader;
+    }
+  
+    // Render todos to the DOM
+    renderLeader();
+  }
+  
+  function storeLeader() {
+    // Stringify and set "todos" key in localStorage to todos array
+    localStorage.setItem("leader", JSON.stringify(leader));
+  }
+
+//}
+function runLeaderboard(){
+    // When form is submitted...
+leaderForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+  
+    var leaderText = leaderInput.value.trim();
+  
+    // Return from function early if submitted todoText is blank
+    if (leaderText === "") {
+      return;
+    }
+  
+    // Add new todoText to todos array, clear the input
+    leader.push(leaderText);
+    leaderInput.value = "";
+  
+    // Store updated todos in localStorage, re-render the list
+    storeLeader();
+    renderLeader();
+  });
+  
+  // When a element inside of the todoList is clicked...
+    leaderList.addEventListener("click", function(event) {
+    var element = event.target;
+  
+    // If that element is a button...
+    if (element.matches("button") === true) {
+      // Get its data-index value and remove the todo element from the list
+      var index = element.parentElement.getAttribute("data-index");
+      leader.splice(index, 1);
+  
+      // Store updated todos in localStorage, re-render the list
+      storeLeader();
+      renderLeader();
+    }
+  });
+
 }
+
+
+
 
 //add event listener
 startButton.addEventListener("click", startQuiz);
