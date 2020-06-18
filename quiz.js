@@ -35,7 +35,6 @@ var questions = [
   var leaderInput = document.createElement("input");
   var leaderP = document.createElement("P");
   var leaderSpan = document.createElement("span");
-  //var leaderList = document.querySelector("leader-list");
   var leaderUL = document.createElement("ul");
   var leader = [];
   var leaderboardDiv = document.querySelector(".leader");
@@ -45,19 +44,6 @@ var containerE1 = document.querySelector (".container");
 var timerDisplay = document.querySelector(".timer");
 var resultsDiv = document.querySelector(".results");
 var finalresultsDiv = document.querySelector(".finalResults");
-
-//ok i am working here********
-// var showleaderBoard = document.querySelector("leaderboardDiv");
-// ////leaderboard variables
-// var leaders = [];
-
-// var leaderInput = document.querySelector("#leader-text");
-// var leaderForm = document.querySelector("#leader-form");
-// var leaderList = document.querySelector("#leader-list");
-// var leaderCountSpan = document.querySelector("#leader-count");
-
-//var leaderboardDiv = document.querySelector(".leader");
-
 
 var startText = document.createElement('h1');
 var startButton = document.createElement("button");
@@ -115,7 +101,6 @@ function showTimer(){
     timerDisplay.textContent = timer;
         //create set interval and store in variable
         //variable because need to clear
-//if(timesUp===false){
      timeInterval = setInterval(function(){
             //decrease by 1
             console.log("timerNumber is " + timerNumber +", timer is " + timer);
@@ -130,42 +115,18 @@ function showTimer(){
         timerDisplay.textContent = timer;
             //if time reach zero stop
          if (timer <= 0){
-            clearInterval(timeInterval);
-                // clearTimeout(timer); 
+            clearInterval(timeInterval); 
               timesUp=true;  
               timeOut();          
         }
     },1000);
-    //}
-}
-//function that handles and displays next Q
-//function to check answer and display
-
-// function timeDecrease(){
-//     timerNumber = timerNumber-5;
-//     timerDisplay.textContent = timerNumber;
-//     if (timerNumber === 0){
-//     //clearInterval(timeInterval);
-//     //timeOut();
     
-//     timerNumber = 20; 
-//     restartTimer();
-//     index++;
-//     }  
-//  }
+}
 
-// function restartTimer(){
-//             timer= timerNumber;
-//             timerDisplay.textContent = timerNumber;
-//             timesUp=false;
-//             console.log("reset timer did the thing")
-// }
 
 function timeOut(){
     resultsText.textContent ="TIME UP";
-    resultsDiv.appendChild(resultsText);
-        //textTimeout();
-            
+    resultsDiv.appendChild(resultsText);           
     index++;
     console.log("timeout incremented index, index is "+ index);
     if (index === questions.length){
@@ -216,9 +177,6 @@ function checkAnswer(event){
             index++;
 //if answer is wrong********************************************************************
                 }else if (event.target.textContent!=questions[index].answer){
-            //hmmmmmm
-            //timerDisplay=timer-5;
-           // timerNumber =timerNumber-5;
     if(timer-5 >= 0){
            timer =timer-5;
         }else{
@@ -231,15 +189,11 @@ function checkAnswer(event){
             textTimeout();
             index++;
                     }
-     //old
-         //index ++;
 
     if(index != questions.length && timerNumber > 0){
 
         console.log("checkAnswer incremented index, index is " + index);
-       //index++
         nextQuestion();
-       // restartTimer();
             }else{
         lastPage();
 
@@ -271,8 +225,6 @@ function lastPage(){
     finalscoreText.textContent = "Your Final Score is " + score;
     containerE1.appendChild(finalresultsText);
     containerE1.appendChild(finalscoreText);
-    //renderLeader();
-   // LeaderBoard();
    init();
    runLeaderboard();
  
@@ -280,53 +232,28 @@ function lastPage(){
     console.log("last page runnin")
     }
 
-// function renderleaderBoard(){
-//         showleaderBoard.innerHTML = "";
-//        // todoCountSpan.textContent = leaders.length;
-// }
-
-
-//function LeaderBoard(){
-
 function renderLeader() {
-    // Clear todoList element and update todoCountSpan
-    // var leaderboardDiv = document.querySelector(".leader");
-    // var leaderList = document.querySelector("#leader-list");
-   // containerE1.appendChild(leaderboardDiv);
-
-
-// var leader = [];
-
-
-//    var leaderForm = document.createElement("FORM");
 
     leaderForm.id = "leader-form";
     leaderForm.method='POST';
     leaderboardDiv.appendChild(leaderForm);
     
-    // var leaderLabel = document.createElement("label");
     leaderForm.appendChild(leaderLabel);
     leaderLabel.textContent= "Add Your Name: ";
 
-    //  var leaderInput = document.createElement("input");
      leaderForm.appendChild(leaderInput);
      leaderInput.id = "leader-text";
      leaderInput.name = "leader-text";
 
-    //  var leaderP = document.createElement("P");
      leaderP.textContent = "Leaders ";
      leaderboardDiv.appendChild(leaderP);
 
-    //  var leaderSpan = document.createElement("span");
      leaderSpan.id = "leader-count";
      leaderP.appendChild(leaderSpan);
      leaderSpan.textContent = "0";
 
-    //  var leaderUL = document.createElement("ul");
      leaderUL.id="leader-list";
      leaderboardDiv.appendChild(leaderUL);
-
-    //  var leaderList = document.querySelector("#leader-list");
      
 
      leaderUL.innerHTML = "";
@@ -334,7 +261,7 @@ function renderLeader() {
     console.log ("render leader ran");
 
 
-    // Render a new li for each todo
+    // Render a new li for each leader
      for (var i = 0; i < leader.length; i++) {
        var leader1 = leader[i];
   
@@ -343,7 +270,7 @@ function renderLeader() {
        li.setAttribute("data-index", i);
   
        var button = document.createElement("button");
-       button.textContent = "Complete";
+       button.textContent = "Clear";
   
        li.appendChild(button);
        leaderUL.appendChild(li);
@@ -353,16 +280,12 @@ function renderLeader() {
   }
 
   function init() {
-    // Get stored todos from localStorage
-    // Parsing the JSON string to an object
     var storedLeader = JSON.parse(localStorage.getItem("leader"));
-  
-    // If todos were retrieved from localStorage, update the todos array to it
     if (storedLeader !== null) {
       leader = storedLeader;
     }
   
-    // Render todos to the DOM
+    // Render leader to the DOM
     renderLeader();
   }
   
@@ -371,7 +294,6 @@ function renderLeader() {
     localStorage.setItem("leader", JSON.stringify(leader));
   }
 
-//}
 function runLeaderboard(){
     // When form is submitted...
 leaderForm.addEventListener("submit", function(event) {
@@ -379,16 +301,16 @@ leaderForm.addEventListener("submit", function(event) {
   
     var leaderText = leaderInput.value.trim();
   
-    // Return from function early if submitted todoText is blank
+    // Return from function early if submitted leadertext is blank
     if (leaderText === "") {
       return;
     }
   
-    // Add new todoText to todos array, clear the input
-    leader.push(leaderText);
+    // Add new leaderText to todos array, clear the input
+    leader.push(leaderText + " " + score);
     leaderInput.value = "";
   
-    // Store updated todos in localStorage, re-render the list
+    // Store updated leader in localStorage, re-render the list
     storeLeader();
     renderLeader();
   });
@@ -411,9 +333,6 @@ leaderForm.addEventListener("submit", function(event) {
 
 }
 
-
-
-
 //add event listener
 startButton.addEventListener("click", startQuiz);
 
@@ -422,13 +341,16 @@ startButton.addEventListener("click", startQuiz);
 document.addEventListener("click", checkAnswer);
 
 openPage();
-    //lastPage();
-    // textTimeout();
 
 
 
 //******************the things i need***************************************************************************
-    //need leaderboard***********************************************(use bootstrap)
+    
     //need css format******************************
+
+
+
+
+
     //view highscores****************
      //need restart quiz*****
