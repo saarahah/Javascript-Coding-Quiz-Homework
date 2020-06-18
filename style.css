@@ -1,0 +1,91 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  background-color: slategray;
+  position: absolute;
+  text-align: center;
+}
+
+.timer{
+    text-align: left;
+}
+
+h1{
+
+    font-size: 72px;
+}
+
+button{
+
+    /* float: right; */
+    border: none;
+    height: 40px;
+    cursor: pointer;
+    background-color: slateblue;
+    color: white;
+    font-size: 1em;
+
+}
+
+input {
+  height: 50px;
+  width: 100%;
+  padding: 6px;
+  margin-top: 10px;
+  font-size: 2.4em;
+  border: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  background-color: white;
+}
+
+li {
+  height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: lightblue;
+  color: white;
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+
+li:before {
+  content: "\200B";
+  position: absolute;
+}
+
+li::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+li button {
+  float: right;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  background-color: slateblue;
+  color: white;
+  font-size: 1em;
+}
+
+li button:hover {
+  background-color: lightcyan;
+}
+
+.leader {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 40px;
+}

@@ -74,7 +74,7 @@ var score=0;
 //function to load content at first
 function openPage(){
     //title text
-    startText.textContent = "welcome";
+    startText.textContent = "Welcome to the Coding Quiz";
 
     //button
     startButton.textContent = "start quiz";
@@ -341,6 +341,15 @@ startButton.addEventListener("click", startQuiz);
 document.addEventListener("click", checkAnswer);
 
 openPage();
+
+
+
+
+
+
+
+
+
 
 
 
